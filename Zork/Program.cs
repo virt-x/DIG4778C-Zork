@@ -4,9 +4,20 @@ namespace Zork
 {
     class Program
     {
+        private static string CurrentRoom
+        {
+            get
+            {
+                return _rooms[_location.row, _location.column];
+            }
+        }
 
-        private static readonly string[] _rooms = { "Forest", "West of House", "Behind House", "Clearing", "Canyon View" };
-        private static byte _currentRoom = 1;
+        private static readonly string[,] _rooms = {
+            { "Rocky Trail", "South of House", "Canyon View" },
+            { "Forest", "West of House", "Behind House" },
+            { "Dense Woods", "North of House", "Clearing" }
+        };
+        private static (byte row, byte column) _location = (1,1);
 
         static void Main(string[] args)
         {
@@ -15,7 +26,7 @@ namespace Zork
             Commands command = Commands.UNKNOWN;
             while (command != Commands.QUIT)
             {
-                Console.Write($"{ _rooms[_currentRoom]}\n> ");
+                Console.Write($"{CurrentRoom}\n> ");
                 command = ToCommand(Console.ReadLine().Trim());
 
                 string outputString;
@@ -51,22 +62,25 @@ namespace Zork
         {
             switch (command)
             {
-                case Commands.NORTH:
-                case Commands.SOUTH:
-                    break;
-
-                case Commands.EAST when _currentRoom < _rooms.Length - 1:
-                    _currentRoom++;
+                case Commands.NORTH when _location.row < _rooms.GetLength(0) - 1:
+                    _location.row++;
                     return true;
 
-                case Commands.WEST when _currentRoom > 0:
-                    _currentRoom--;
+                case Commands.SOUTH when _location.row > 0:
+                    _location.row--;
+                    return true;
+
+                case Commands.EAST when _location.column < _rooms.GetLength(1) - 1:
+                    _location.column++;
+                    return true;
+
+                case Commands.WEST when _location.column > 0:
+                    _location.column--;
                     return true;
 
                 default:
                     return false;
             }
-            return false;
         }
     }
 }
