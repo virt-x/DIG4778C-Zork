@@ -4,7 +4,14 @@ namespace Zork
 {
     class Program
     {
-        private static string CurrentRoom
+        private static readonly Room[,] _rooms = {
+            { new Room("Rocky Trail"), new Room("South of House"), new Room("Canyon View") },
+            { new Room("Forest"), new Room("West of House"), new Room("Behind House") },
+            { new Room("Dense Woods"), new Room("North of House"), new Room("Clearing") }
+        };
+        private static (byte row, byte column) _location = (1,1);
+
+        private static Room CurrentRoom
         {
             get
             {
@@ -12,16 +19,11 @@ namespace Zork
             }
         }
 
-        private static readonly string[,] _rooms = {
-            { "Rocky Trail", "South of House", "Canyon View" },
-            { "Forest", "West of House", "Behind House" },
-            { "Dense Woods", "North of House", "Clearing" }
-        };
-        private static (byte row, byte column) _location = (1,1);
-
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Zork!");
+
+            InitializeRoomDescriptions();
 
             Commands command = Commands.UNKNOWN;
             while (command != Commands.QUIT)
@@ -81,6 +83,21 @@ namespace Zork
                 default:
                     return false;
             }
+        }
+
+        private static void InitializeRoomDescriptions()
+        {
+            _rooms[0, 0].Description = "You are on a rock-strewn trail.";
+            _rooms[0, 1].Description = "Yo are facing the south side of a white house. There is no door here, and all the windows are barred.";
+            _rooms[0, 1].Description = "You are at the top of the Great Canyon on its south wall.";
+
+            _rooms[1, 0].Description = "This is a forest, with trees in all directinos around you.";
+            _rooms[1, 1].Description = "This is an open field west of a white house, with a boarded front door.";
+            _rooms[1, 1].Description = "You are behind the white house. In one corner of the house there is a small window which is slightly ajar.";
+
+            _rooms[2, 0].Description = "This is a dimly lit forest, with large trees alll around. To the east, there appears to be sunlight.";
+            _rooms[2, 1].Description = "You are facing the north side of a white house. There is no door here, and all the windows are barred.";
+            _rooms[2, 2].Description = "You are in a clearing, with a forest surrounding you on the west and south.";
         }
     }
 }
