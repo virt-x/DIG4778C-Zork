@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace Zork
 {
@@ -12,7 +11,6 @@ namespace Zork
             { new Room("Forest"), new Room("West of House"), new Room("Behind House") },
             { new Room("Dense Woods"), new Room("North of House"), new Room("Clearing") }
         };
-        private static readonly Dictionary<string, Room> RoomMap;
         private static (byte row, byte column) _location = (1, 1);
 
         private static Room CurrentRoom
@@ -23,25 +21,15 @@ namespace Zork
             }
         }
 
-        static Program()
-        {
-            RoomMap = new Dictionary<string, Room>();
-            foreach (Room room in _rooms)
-            {
-                RoomMap[room.Name] = room;
-            }
-        }
-
         private enum CommandLineArguments
         {
             RoomsFilename = 0
         }
-
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Zork!");
 
-            const string defaultRoomsFilename = "Content\\Rooms.txt";
+            const string defaultRoomsFilename = @"Content\Rooms.txt";
             string roomsFilename = (args.Length > 0 ? args[(int)CommandLineArguments.RoomsFilename] : defaultRoomsFilename);
             InitializeRoomDescriptions(roomsFilename);
 
@@ -121,18 +109,27 @@ namespace Zork
         }
         private static void InitializeRoomDescriptions(string roomsFilename)
         {
+            var roomMap = new Dictionary<string, Room>();
+            foreach (Room room in _rooms)
+            {
+                roomMap[room.Name] = room;
+            }
+
             const string fieldDelimiter = "##";
             const int expectedFieldCount = 2;
 
-            var roomQuery = from line in File.ReadLines(roomsFilename)
-                            let fields = line.Split(fieldDelimiter)
-                            where fields.Length == expectedFieldCount
-                            select (Name: fields[(int)Fields.Name],
-                                    Description: fields[(int)Fields.Description]);
-
-            foreach (var (Name, Description) in roomQuery)
+            string[] lines = File.ReadAllLines(roomsFilename);
+            foreach (string line in lines)
             {
-                RoomMap[Name].Description = Description;
+                string[] fields = line.Split(fieldDelimiter);
+                if (fields.Length != expectedFieldCount)
+                {
+                    throw new InvalidDataException("Invalid record.");
+                }
+                string name = fields[(int)Fields.Name];
+                string description = fields[(int)Fields.Description];
+
+                roomMap[name].Description = description;
             }
         }
     }
