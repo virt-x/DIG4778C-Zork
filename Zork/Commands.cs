@@ -1,6 +1,5 @@
 ﻿namespace Zork
 {
-
     enum Commands
     {
         QUIT,
