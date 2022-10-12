@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Zork
 {
@@ -23,13 +21,13 @@ namespace Zork
             }
         }
 
-        public Player (World world, string startingLocation)
+        public Player(World world, string startingLocation)
         {
             World = world;
             LocationName = startingLocation;
         }
 
-        public bool Move (Directions direction)
+        public bool Move(Directions direction)
         {
             bool isValidMove = Location.Neighbors.TryGetValue(direction, out Room destination);
             if (isValidMove)

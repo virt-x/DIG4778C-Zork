@@ -60,7 +60,9 @@ namespace Zork
 
         public static Game Load(string filename)
         {
-            return JsonConvert.DeserializeObject<Game>(File.ReadAllText(filename));
+            Game game = JsonConvert.DeserializeObject<Game>(File.ReadAllText(filename));
+            game.Player = game.World.SpawnPlayer();
+            return game;
         }
 
         private static Commands ToCommand(string commandString)
