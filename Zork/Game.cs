@@ -14,7 +14,14 @@ namespace Zork
         public Game(World world, Player player)
         {
             World = world;
-            Player = player;
+            if (player != null)
+            {
+                Player = player;
+            }
+            else
+            {
+                Player = World.SpawnPlayer();
+            };
         }
 
         public void Run()
@@ -46,7 +53,7 @@ namespace Zork
                     case Commands.SOUTH:
                     case Commands.EAST:
                     case Commands.WEST:
-                        Directions direction = Enum.Parse<Directions>(command.ToString(), true);
+                        Directions direction = (Directions)command;
                         outputString = Player.Move(direction) ? $"You moved {command}." : "The way is shut!";
                         break;
                     default:
@@ -60,9 +67,7 @@ namespace Zork
 
         public static Game Load(string filename)
         {
-            Game game = JsonConvert.DeserializeObject<Game>(File.ReadAllText(filename));
-            game.Player = game.World.SpawnPlayer();
-            return game;
+            return JsonConvert.DeserializeObject<Game>(File.ReadAllText(filename));
         }
 
         private static Commands ToCommand(string commandString)

@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Zork
 {
     public class Player
     {
-        public World World { get; }
+        private World _world;
         [JsonIgnore]
         public Room Location { get; private set; }
         [JsonIgnore]
@@ -17,14 +18,18 @@ namespace Zork
             }
             set
             {
-                Location = World?.RoomsByName.GetValueOrDefault(value);
+                Location = _world?.RoomsByName.GetValueOrDefault(value);
             }
         }
 
         public Player(World world, string startingLocation)
         {
-            World = world;
+            _world = world;
             LocationName = startingLocation;
+            if (Location == null)
+            {
+                throw new Exception($"Invalid starting location: {startingLocation}");
+            }
         }
 
         public bool Move(Directions direction)
