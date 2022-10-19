@@ -56,6 +56,13 @@ namespace Zork
                         Directions direction = (Directions)command;
                         outputString = Player.Move(direction) ? $"You moved {command}." : "The way is shut!";
                         break;
+                    case Commands.SCORE:
+                        outputString = $"Your score would be {Player.Score}, in {Player.MoveCount} move(s).";
+                        break;
+                    case Commands.REWARD:
+                        outputString = "Score increased.";
+                        Player.Score++;
+                        break;
                     default:
                         outputString = "Unknown command.";
                         break;

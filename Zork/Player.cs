@@ -21,6 +21,10 @@ namespace Zork
                 Location = _world?.RoomsByName.GetValueOrDefault(value);
             }
         }
+        [JsonIgnore]
+        public int Score { get; set; }
+        [JsonIgnore]
+        public int MoveCount { get; private set; }
 
         public Player(World world, string startingLocation)
         {
@@ -38,6 +42,7 @@ namespace Zork
             if (isValidMove)
             {
                 Location = destination;
+                MoveCount++;
             }
             return isValidMove;
         }
