@@ -25,6 +25,8 @@ namespace Zork
         public int Score { get; set; }
         [JsonIgnore]
         public int MoveCount { get; private set; }
+        [JsonIgnore]
+        public List<Item> Inventory { get; }
 
         public Player(World world, string startingLocation)
         {
