@@ -73,7 +73,7 @@ namespace Zork
         public void UpdateInventory(World world)
         {
             Inventory = (from entry in InventoryNames
-                         let item = world.ItemsByName.GetValueOrDefault(entry)
+                         let item = world.ItemsByName.GetValueOrDefault(entry.ToUpper())
                          where item != null
                          select item).ToList();
 

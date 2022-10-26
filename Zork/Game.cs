@@ -61,7 +61,7 @@ namespace Zork
                         break;
                     case Commands.LOOK:
                         outputString = Player.Location.Description;
-                        foreach(Item item in Player.Location.Inventory)
+                        foreach (Item item in Player.Location.Inventory)
                         {
                             additionalOutputs.Add(item.Description);
                         }
@@ -144,7 +144,7 @@ namespace Zork
                 }
 
                 Console.WriteLine(outputString);
-                foreach(string output in additionalOutputs)
+                foreach (string output in additionalOutputs)
                 {
                     Console.WriteLine(output);
                 }
