@@ -14,7 +14,7 @@ namespace Zork
         [JsonProperty(PropertyName = "Neighbors", Order = 3)]
         private Dictionary<Directions, string> NeighborNames { get; set; }
         [JsonProperty(PropertyName = "Items", Order = 4)]
-        private string[] InventoryNames { get; set; }
+        public List<string> InventoryNames { get; private set; }
 
         [JsonIgnore]
         public IReadOnlyDictionary<Directions, Room> Neighbors { get; private set; }
@@ -51,12 +51,12 @@ namespace Zork
             return this == other;
         }
 
-        public Room(string name, string description, Dictionary<Directions, string> neighbors, string[] items)
+        public Room(string name, string description, Dictionary<Directions, string> neighbors, List<string> items)
         {
             Name = name;
             Description = description;
             NeighborNames = neighbors ?? new Dictionary<Directions, string>();
-            InventoryNames = items;
+            InventoryNames = items ?? new List<string>();
         }
 
         public void UpdateNeighbors(World world)
@@ -72,7 +72,29 @@ namespace Zork
 
         public void UpdateInventory(World world)
         {
+            Inventory = (from entry in InventoryNames
+                         let item = world.ItemsByName.GetValueOrDefault(entry)
+                         where item != null
+                         select item).ToList();
 
+            InventoryNames = null;
+        }
+
+        public void AddItem(Item item)
+        {
+            Inventory.Add(item);
+        }
+
+        public void RemoveItem(Item item)
+        {
+            if (Inventory.Contains(item))
+            {
+                Inventory.Remove(item);
+            }
+            else
+            {
+                throw new Exception($"Item {item.Name} does not exist in this room.");
+            }
         }
 
         public override string ToString()
