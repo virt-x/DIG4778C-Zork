@@ -31,17 +31,13 @@ namespace Zork.Common
         public bool IsRunning { get; private set; }
         public Room PreviousRoom { get; private set; }
 
-        private enum CommandArguments
-        {
-            Command = 0,
-            Item
-        }
         public void Run(IInputService inputService, IOutputService outputService)
         {
-            Input = inputService ?? throw new ArgumentNullException(nameof(inputService)); ;
+            Input = inputService ?? throw new ArgumentNullException(nameof(inputService));
             Output = outputService ?? throw new ArgumentNullException(nameof(outputService));
             IsRunning = true;
             Input.InputReceived += Input_InputReceived;
+
             Output.WriteLine(Player.Location.Description);
             foreach (Item item in Player.Location.Inventory)
             {
@@ -51,10 +47,15 @@ namespace Zork.Common
             Output.Write(">");
         }
 
+        private enum CommandArguments
+        {
+            Verb = 0,
+            Subject
+        }
         private void Input_InputReceived(object sender, string inputString)
         {
             string[] commandInputs = inputString.Split(" ");
-            Commands command = ToCommand(commandInputs[(int)CommandArguments.Command]);
+            Commands command = ToCommand(commandInputs[(int)CommandArguments.Verb]);
 
             string outputString;
             var additionalOutputs = new List<string>();
@@ -76,7 +77,7 @@ namespace Zork.Common
                 case Commands.EAST:
                 case Commands.WEST:
                     Directions direction = (Directions)command;
-                    outputString = Player.Move(direction) ? $"You moved {command}." : "The way is shut!";
+                    outputString = Player.Move(direction) ? $"You moved {direction}." : "The way is shut!";
                     break;
                 case Commands.SCORE:
                     outputString = $"Your score would be {Player.Score}, in {Player.MoveCount} move(s).";
@@ -92,7 +93,7 @@ namespace Zork.Common
                             outputString = "This command requires a subject.";
                             break;
                         default:
-                            if (World.ItemsByName.TryGetValue(commandInputs[(int)CommandArguments.Item].ToUpper(), out Item target))
+                            if (World.ItemsByName.TryGetValue(commandInputs[(int)CommandArguments.Subject].ToUpper(), out Item target))
                             {
                                 if (Player.Inventory.Contains(target))
                                 {
@@ -123,7 +124,7 @@ namespace Zork.Common
                             outputString = "This command requires a subject.";
                             break;
                         default:
-                            if (World.ItemsByName.TryGetValue(commandInputs[(int)CommandArguments.Item].ToUpper(), out Item target))
+                            if (World.ItemsByName.TryGetValue(commandInputs[(int)CommandArguments.Subject].ToUpper(), out Item target))
                             {
                                 if (Player.Location.Inventory.Contains(target))
                                 {

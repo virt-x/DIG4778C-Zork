@@ -20,6 +20,7 @@ namespace Zork.CommandLine
             var input = new ConsoleInputService();
             var output = new ConsoleOutputService();
             game.Run(input, output);
+
             while (game.IsRunning)
             {
                 input.ProcessInput();
