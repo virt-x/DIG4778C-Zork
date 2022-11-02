@@ -1,6 +1,7 @@
 ﻿using System;
+using Zork.Common;
 
-namespace Zork
+namespace Zork.CommandLine
 {
     class Program
     {
@@ -15,7 +16,14 @@ namespace Zork
 
             Game game = Game.Load(gameFilename);
             Console.WriteLine("Welcome to Zork!");
-            game.Run();
+
+            var input = new ConsoleInputService();
+            var output = new ConsoleOutputService();
+            game.Run(input, output);
+            while (game.IsRunning)
+            {
+                input.ProcessInput();
+            }
         }
     }
 }

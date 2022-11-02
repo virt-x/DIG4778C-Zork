@@ -1,0 +1,128 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.CommandLine\\Zork.CommandLine.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.CommandLine\\Zork.CommandLine.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.CommandLine\\Zork.CommandLine.csproj",
+        "projectName": "Zork.CommandLine",
+        "projectPath": "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.CommandLine\\Zork.CommandLine.csproj",
+        "packagesPath": "C:\\Users\\Gerald\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.CommandLine\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Gerald\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {
+              "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.Common\\Zork.Common.csproj": {
+                "projectPath": "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.Common\\Zork.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.Common\\Zork.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.Common\\Zork.Common.csproj",
+        "projectName": "Zork.Common",
+        "projectPath": "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.Common\\Zork.Common.csproj",
+        "packagesPath": "C:\\Users\\Gerald\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gerald\\Documents\\Github\\DIG4778C-Zork\\Zork.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Gerald\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

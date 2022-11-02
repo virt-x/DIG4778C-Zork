@@ -1,0 +1,16 @@
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\bin\Debug\netcoreapp2.1\Content\Zork.json
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\bin\Debug\netcoreapp2.1\Zork.CommandLine.deps.json
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\bin\Debug\netcoreapp2.1\Zork.CommandLine.runtimeconfig.json
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\bin\Debug\netcoreapp2.1\Zork.CommandLine.runtimeconfig.dev.json
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\bin\Debug\netcoreapp2.1\Zork.CommandLine.dll
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\bin\Debug\netcoreapp2.1\Zork.CommandLine.pdb
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\bin\Debug\netcoreapp2.1\Zork.Common.dll
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\bin\Debug\netcoreapp2.1\Zork.Common.pdb
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\obj\Debug\netcoreapp2.1\Zork.CommandLine.csprojAssemblyReference.cache
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\obj\Debug\netcoreapp2.1\Zork.CommandLine.AssemblyInfoInputs.cache
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\obj\Debug\netcoreapp2.1\Zork.CommandLine.AssemblyInfo.cs
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\obj\Debug\netcoreapp2.1\Zork.CommandLine.csproj.CoreCompileInputs.cache
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\obj\Debug\netcoreapp2.1\Zork.CommandLine.csproj.CopyComplete
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\obj\Debug\netcoreapp2.1\Zork.CommandLine.dll
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\obj\Debug\netcoreapp2.1\Zork.CommandLine.pdb
+C:\Users\Gerald\Documents\Github\DIG4778C-Zork\Zork.CommandLine\obj\Debug\netcoreapp2.1\Zork.CommandLine.genruntimeconfig.cache

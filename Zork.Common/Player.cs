@@ -2,11 +2,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace Zork
+namespace Zork.Common
 {
     public class Player
     {
         private World _world;
+        private int _moves;
+        private int _score;
+        public event EventHandler<int> MovesChanged;
+        public event EventHandler<int> ScoreChanged;
         [JsonIgnore]
         public Room Location { get; private set; }
         [JsonIgnore]
@@ -22,9 +26,31 @@ namespace Zork
             }
         }
         [JsonIgnore]
-        public int Score { get; set; }
+        public int Score
+        {
+            get => _score;
+            set
+            {
+                if (_score != value)
+                {
+                    _score = value;
+                    ScoreChanged?.Invoke(this, _score);
+                }
+            }
+        }
         [JsonIgnore]
-        public int MoveCount { get; private set; }
+        public int MoveCount
+        {
+            get => _moves;
+            set
+            {
+                if (_moves != value)
+                {
+                    _moves = value;
+                    MovesChanged?.Invoke(this, _moves);
+                }
+            }
+        }
         [JsonIgnore]
         public List<Item> Inventory { get; }
 
