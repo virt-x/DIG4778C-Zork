@@ -4,11 +4,13 @@
     "Items": [
       {
         "Name": "Mat",
-        "Description": "A rubber mat with the words 'Welcome to Zork!' written on it lies here."
+        "Description": "A rubber mat with the words 'Welcome to Zork!' written on it lies here.",
+        "HeldDescription": "A welcome mat."
       },
       {
         "Name": "Mailbox",
-        "Description": "A small mailbox is here."
+        "Description": "A small mailbox is here.",
+        "HeldDescription": "A small mailbox."
       }
     ],
     "Rooms": [

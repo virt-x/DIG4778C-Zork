@@ -92,13 +92,22 @@ namespace Zork.Common
                             outputString = "This command requires a subject.";
                             break;
                         default:
-                            commandInputs[(int)CommandArguments.Item] = commandInputs[(int)CommandArguments.Item].ToUpper();
-                            Item target;
-                            if (World.ItemsByName.TryGetValue(commandInputs[(int)CommandArguments.Item], out target) && Player.Location.Inventory.Contains(target))
+                            if (World.ItemsByName.TryGetValue(commandInputs[(int)CommandArguments.Item].ToUpper(), out Item target))
                             {
-                                outputString = "Taken.";
-                                Player.AddItem(target);
-                                Player.Location.RemoveItem(target);
+                                if (Player.Inventory.Contains(target))
+                                {
+                                    outputString = "You already have that.";
+                                }
+                                else if (Player.Location.Inventory.Contains(target))
+                                {
+                                    outputString = "Taken.";
+                                    Player.AddItem(target);
+                                    Player.Location.RemoveItem(target);
+                                }
+                                else
+                                {
+                                    outputString = "You can't see any such thing.";
+                                }
                             }
                             else
                             {
@@ -114,13 +123,22 @@ namespace Zork.Common
                             outputString = "This command requires a subject.";
                             break;
                         default:
-                            commandInputs[(int)CommandArguments.Item] = commandInputs[(int)CommandArguments.Item].ToUpper();
-                            Item target;
-                            if (World.ItemsByName.TryGetValue(commandInputs[(int)CommandArguments.Item], out target) && Player.Inventory.Contains(target))
+                            if (World.ItemsByName.TryGetValue(commandInputs[(int)CommandArguments.Item].ToUpper(), out Item target))
                             {
-                                outputString = "Dropped.";
-                                Player.RemoveItem(target);
-                                Player.Location.AddItem(target);
+                                if (Player.Location.Inventory.Contains(target))
+                                {
+                                    outputString = "That's already here.";
+                                }
+                                else if (Player.Inventory.Contains(target))
+                                {
+                                    outputString = "Dropped.";
+                                    Player.RemoveItem(target);
+                                    Player.Location.AddItem(target);
+                                }
+                                else
+                                {
+                                    outputString = "You don't have any such thing.";
+                                }
                             }
                             else
                             {
@@ -135,7 +153,7 @@ namespace Zork.Common
                         outputString = "Your inventory contains:";
                         foreach (Item item in Player.Inventory)
                         {
-                            additionalOutputs.Add(item.Description);
+                            additionalOutputs.Add(item.HeldDescription);
                         }
                     }
                     else
