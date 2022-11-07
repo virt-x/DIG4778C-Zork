@@ -7,6 +7,7 @@ namespace Zork.Common
 {
     public class Room : IEquatable<Room>
     {
+        private List<Item> _inventory;
         [JsonProperty(Order = 1)]
         public string Name { get; }
         [JsonProperty(Order = 2)]
@@ -19,7 +20,7 @@ namespace Zork.Common
         [JsonIgnore]
         public IReadOnlyDictionary<Directions, Room> Neighbors { get; private set; }
         [JsonIgnore]
-        public List<Item> Inventory { get; private set; }
+        public IReadOnlyList<Item> Inventory => _inventory;
 
         public static bool operator ==(Room lhs, Room rhs)
         {
@@ -72,7 +73,7 @@ namespace Zork.Common
 
         public void UpdateInventory(World world)
         {
-            Inventory = (from entry in InventoryNames
+            _inventory = (from entry in InventoryNames
                          let item = world.ItemsByName.GetValueOrDefault(entry.ToUpper())
                          where item != null
                          select item).ToList();
@@ -82,14 +83,14 @@ namespace Zork.Common
 
         public void AddItem(Item item)
         {
-            Inventory.Add(item);
+            _inventory.Add(item);
         }
 
         public void RemoveItem(Item item)
         {
             if (Inventory.Contains(item))
             {
-                Inventory.Remove(item);
+                _inventory.Remove(item);
             }
             else
             {

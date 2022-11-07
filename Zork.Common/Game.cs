@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Zork.Common
 {
@@ -38,13 +39,7 @@ namespace Zork.Common
             IsRunning = true;
             Input.InputReceived += Input_InputReceived;
 
-            Output.WriteLine(Player.Location.Description);
-            foreach (Item item in Player.Location.Inventory)
-            {
-                Output.WriteLine(item.Description);
-            }
-            PreviousRoom = Player.Location;
-            Output.Write(">");
+            Prompt();
         }
 
         private enum CommandArguments
@@ -174,19 +169,24 @@ namespace Zork.Common
             }
             if (IsRunning)
             {
-                Output.WriteLine(null);
-                Output.WriteLine(Player.Location);
-                if (PreviousRoom != Player.Location)
-                {
-                    Output.WriteLine(Player.Location.Description);
-                    foreach (Item item in Player.Location.Inventory)
-                    {
-                        Output.WriteLine(item.Description);
-                    }
-                    PreviousRoom = Player.Location;
-                }
-                Output.Write(">");
+                Prompt();
             }
+        }
+
+        private void Prompt()
+        {
+            Output.WriteLine(null);
+            Output.WriteLine(Player.Location);
+            if (PreviousRoom != Player.Location)
+            {
+                Output.WriteLine(Player.Location.Description);
+                foreach (Item item in Player.Location.Inventory)
+                {
+                    Output.WriteLine(item.Description);
+                }
+                PreviousRoom = Player.Location;
+            }
+            Output.Write(">");
         }
 
         public static Game Load(string filename)

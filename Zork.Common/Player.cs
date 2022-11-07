@@ -9,6 +9,7 @@ namespace Zork.Common
         private World _world;
         private int _moves;
         private int _score;
+        private List<Item> _inventory;
         public event EventHandler<int> MovesChanged;
         public event EventHandler<int> ScoreChanged;
         [JsonIgnore]
@@ -52,7 +53,7 @@ namespace Zork.Common
             }
         }
         [JsonIgnore]
-        public List<Item> Inventory { get; }
+        public IReadOnlyList<Item> Inventory => _inventory;
 
         public Player(World world, string startingLocation)
         {
@@ -62,7 +63,7 @@ namespace Zork.Common
             {
                 throw new Exception($"Invalid starting location: {startingLocation}");
             }
-            Inventory = new List<Item>();
+            _inventory = new List<Item>();
         }
 
         public bool Move(Directions direction)
@@ -78,13 +79,13 @@ namespace Zork.Common
 
         public void AddItem(Item item)
         {
-            Inventory.Add(item);
+            _inventory.Add(item);
             MoveCount++;
         }
 
         public void RemoveItem(Item item)
         {
-            Inventory.Remove(item);
+            _inventory.Remove(item);
             MoveCount++;
         }
     }
