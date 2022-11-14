@@ -189,9 +189,9 @@ namespace Zork.Common
             Output.Write(">");
         }
 
-        public static Game Load(string filename)
+        public static Game Load(string content)
         {
-            return JsonConvert.DeserializeObject<Game>(File.ReadAllText(filename));
+            return JsonConvert.DeserializeObject<Game>(content);
         }
 
         private static Commands ToCommand(string commandString)
