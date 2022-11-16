@@ -21,6 +21,7 @@ namespace Zork.CommandLine
             var input = new ConsoleInputService();
             var output = new ConsoleOutputService();
             game.Run(input, output);
+            Console.Write(">");
 
             while (game.IsRunning)
             {

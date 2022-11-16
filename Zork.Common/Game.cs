@@ -32,6 +32,8 @@ namespace Zork.Common
         public bool IsRunning { get; private set; }
         public Room PreviousRoom { get; private set; }
 
+        public EventHandler<bool> QuitEvent;
+
         public void Run(IInputService inputService, IOutputService outputService)
         {
             Input = inputService ?? throw new ArgumentNullException(nameof(inputService));
@@ -171,6 +173,10 @@ namespace Zork.Common
             {
                 Prompt();
             }
+            else
+            {
+                QuitEvent?.Invoke(this, IsRunning);
+            }
         }
 
         private void Prompt()
@@ -186,7 +192,6 @@ namespace Zork.Common
                 }
                 PreviousRoom = Player.Location;
             }
-            Output.Write(">");
         }
 
         public static Game Load(string content)

@@ -8,6 +8,10 @@ public class UnityInputService : MonoBehaviour, IInputService
 
     public void ProcessInput(string inputString)
     {
+        if (inputString == "" || inputString == null)
+        {
+            return;
+        }
         InputReceived?.Invoke(this, inputString);
     }
 }

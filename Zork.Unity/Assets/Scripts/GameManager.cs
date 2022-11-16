@@ -7,9 +7,9 @@ public class GameManager : MonoBehaviour
     private Game _game;
     [SerializeField] private UnityInputService _input;
     [SerializeField] private UnityOutputService _output;
-    [SerializeField] private TextMeshProUGUI locationLabel;
-    [SerializeField] private TextMeshProUGUI scoreLabel;
-    [SerializeField] private TextMeshProUGUI movesLabel;
+    [SerializeField] private TextMeshProUGUI _locationLabel;
+    [SerializeField] private TextMeshProUGUI _scoreLabel;
+    [SerializeField] private TextMeshProUGUI _movesLabel;
     public UnityInputService Input { get => _input; }
 
     private void Awake()
@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         _game.Player.LocationChanged += UpdateLocation;
         _game.Player.ScoreChanged += UpdateScore;
         _game.Player.MovesChanged += UpdateMoves;
+        _game.QuitEvent += Quit;
 
         UpdateLocation(this, _game.Player.LocationName);
         UpdateScore(this, _game.Player.Score);
@@ -28,16 +29,25 @@ public class GameManager : MonoBehaviour
 
     private void UpdateLocation(object sender, string location)
     {
-        locationLabel.text = location;
+        _locationLabel.text = location;
     }
 
     private void UpdateScore(object sender, int value)
     {
-        scoreLabel.text = $"Score: {value}";
+        _scoreLabel.text = $"Score: {value}";
     }
 
     private void UpdateMoves(object sender, int value)
     {
-        movesLabel.text = $"Moves: {value}";
+        _movesLabel.text = $"Moves: {value}";
+    }
+
+    private void Quit(object sender, bool isRunning)
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

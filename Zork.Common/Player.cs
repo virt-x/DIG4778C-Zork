@@ -9,12 +9,24 @@ namespace Zork.Common
         private World _world;
         private int _moves;
         private int _score;
+        private Room _location;
         private List<Item> _inventory;
         public event EventHandler<int> MovesChanged;
         public event EventHandler<int> ScoreChanged;
         public event EventHandler<string> LocationChanged;
         [JsonIgnore]
-        public Room Location { get; private set; }
+        public Room Location 
+        {
+            get
+            {
+                return _location;
+            }
+            private set
+            {
+                _location = value;
+                LocationChanged?.Invoke(this, _location?.Name);
+            }
+        }
         [JsonIgnore]
         public string LocationName
         {
@@ -24,11 +36,7 @@ namespace Zork.Common
             }
             set
             {
-                if (Location != _world?.RoomsByName.GetValueOrDefault(value))
-                {
-                    Location = _world?.RoomsByName.GetValueOrDefault(value);
-                    LocationChanged?.Invoke(this, LocationName);
-                }
+                Location = _world?.RoomsByName.GetValueOrDefault(value);
             }
         }
         [JsonIgnore]

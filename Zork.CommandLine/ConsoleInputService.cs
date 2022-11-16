@@ -11,6 +11,7 @@ namespace Zork.CommandLine
         {
             string inputString = Console.ReadLine().Trim();
             InputReceived?.Invoke(this, inputString);
+            Console.Write(">");
         }
     }
 }
