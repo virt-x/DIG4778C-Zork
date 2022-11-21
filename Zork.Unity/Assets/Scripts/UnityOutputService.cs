@@ -1,14 +1,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Zork.Common;
 
 public class UnityOutputService : MonoBehaviour, IOutputService
 {
     private List<GameObject> _entries = new List<GameObject>();
     [SerializeField] private TextMeshProUGUI _textLinePrefab;
-    [SerializeField] private Image _newLinePrefab;
     [SerializeField] private Transform _contentTransform;
     [SerializeField] private int _maxEntries;
     public void Write(object obj)
@@ -36,6 +34,18 @@ public class UnityOutputService : MonoBehaviour, IOutputService
         var textLine = Instantiate(_textLinePrefab, _contentTransform);
         textLine.text = message;
         AddEntry(textLine.gameObject);
+
+        if (textLine.text != null && textLine.text.Contains("\n"))
+        {
+            string[] lines = textLine.text.Split("\n");
+            textLine.text = lines[0];
+            for (int i = 1; i < lines.Length; i++)
+            {
+                ParseAndWriteLine(lines[i]);
+            }
+        }
+
+        textLine.ForceMeshUpdate();
         if (textLine.isTextOverflowing)
         {
             string overflow = textLine.text.Substring(textLine.firstOverflowCharacterIndex);

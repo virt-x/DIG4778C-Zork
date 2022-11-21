@@ -74,9 +74,9 @@ namespace Zork.Common
         public void UpdateInventory(World world)
         {
             _inventory = (from entry in InventoryNames
-                         let item = world.ItemsByName.GetValueOrDefault(entry.ToUpper())
-                         where item != null
-                         select item).ToList();
+                          let item = world.ItemsByName.GetValueOrDefault(entry.ToUpper())
+                          where item != null
+                          select item).ToList();
 
             InventoryNames = null;
         }

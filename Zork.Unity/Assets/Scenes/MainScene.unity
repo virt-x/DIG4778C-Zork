@@ -708,6 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff2e2e82618eb645aad2d75de505f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _outputService: {fileID: 569151338}
 --- !u!114 &569151338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,7 +724,7 @@ MonoBehaviour:
   _textLinePrefab: {fileID: 7347319902697487076, guid: 701b5da8f1a44a64ca7ef364acbd78d2, type: 3}
   _newLinePrefab: {fileID: 8781323534274097099, guid: 41a64243f2249a5409282d85d92d8ee7, type: 3}
   _contentTransform: {fileID: 1847898373}
-  _maxEntries: 10
+  _maxEntries: 40
 --- !u!1 &653709737
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,6 +855,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: TMPro.TMP_InputField, Unity.TextMeshPro
         m_MethodName: ActivateInputField
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 25999481}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Scrollbar, UnityEngine.UI
+        m_MethodName: set_value
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

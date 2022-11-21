@@ -15,7 +15,7 @@ namespace Zork.Common
         public event EventHandler<int> ScoreChanged;
         public event EventHandler<string> LocationChanged;
         [JsonIgnore]
-        public Room Location 
+        public Room Location
         {
             get
             {
