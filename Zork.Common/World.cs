@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 
 namespace Zork.Common
 {
-    public class World
+    public class World : INotifyPropertyChanged
     {
         public HashSet<Room> Rooms { get; set; }
         public HashSet<Item> Items { get; set; }
@@ -15,9 +16,11 @@ namespace Zork.Common
         public IReadOnlyDictionary<string, Item> ItemsByName => _itemsByName;
 
         [JsonProperty]
-        private string StartingLocation { get; set; }
+        public string StartingLocation { get; set; }
         private Dictionary<string, Room> _roomsByName;
         private Dictionary<string, Item> _itemsByName;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Player SpawnPlayer()
         {
@@ -38,5 +41,37 @@ namespace Zork.Common
             }
         }
 
+        public World ()
+        {
+            Rooms = new HashSet<Room>();
+            Items = new HashSet<Item>();
+            _roomsByName = new Dictionary<string, Room>();
+            _itemsByName = new Dictionary<string, Item>();
+        }
+
+        public void AddRoom(Room room)
+        {
+            if (!Rooms.Contains(room) && !_roomsByName.ContainsKey(room.Name))
+            {
+                Rooms.Add(room);
+                _roomsByName.Add(room.Name, room);
+            }
+            else
+            {
+                throw new System.Exception("A room by that name already exists.");
+            }
+        }
+        public void RemoveRoom(Room room)
+        {
+            if (Rooms.Contains(room) && _roomsByName.ContainsKey(room.Name))
+            {
+                Rooms.Remove(room);
+                _roomsByName.Remove(room.Name);
+            }
+            else
+            {
+                throw new System.Exception("A room by that name does not exist.");
+            }
+        }
     }
 }

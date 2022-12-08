@@ -36,7 +36,7 @@ namespace Zork.Common
             }
             set
             {
-                Location = _world?.RoomsByName.GetValueOrDefault(value);
+                Location = _world?.RoomsByName[value];
             }
         }
         [JsonIgnore]

@@ -1,0 +1,27 @@
+{
+  "World": {
+    "Rooms": [
+      {
+        "Name": "New Room",
+        "Description": "Test room",
+        "Neighbors": {
+        },
+        "Items": []
+      },
+      {
+        "Name": "New Room 1",
+        "Description": "You shouldn't be able to get in here yet.",
+        "Neighbors": {},
+        "Items": []
+      },
+      {
+        "Name": "New Room 2",
+        "Description": "?????",
+        "Neighbors": {},
+        "Items": []
+      }
+    ],
+    "Items": [],
+    "StartingLocation": "New Room"
+  }
+}

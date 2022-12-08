@@ -1,6 +1,8 @@
-﻿namespace Zork.Common
+﻿using System.ComponentModel;
+
+namespace Zork.Common
 {
-    public class Item
+    public class Item : INotifyPropertyChanged
     {
         public string Name { get; }
         public string Description { get; }
@@ -13,6 +15,8 @@
             Description = description;
             HeldDescription = heldDescription;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public override int GetHashCode()
         {

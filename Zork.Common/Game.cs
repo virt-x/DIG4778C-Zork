@@ -11,8 +11,9 @@ namespace Zork.Common
 
         [JsonIgnore]
         public Player Player { get; private set; }
-
+        [JsonIgnore]
         public IOutputService Output { get; private set; }
+        [JsonIgnore]
         public IInputService Input { get; private set; }
 
         public Game(World world, Player player)
@@ -27,10 +28,11 @@ namespace Zork.Common
                 Player = World.SpawnPlayer();
             };
         }
-
+        [JsonIgnore]
         public bool IsRunning { get; private set; }
+        [JsonIgnore]
         public Room PreviousRoom { get; private set; }
-
+        [JsonIgnore]
         public EventHandler<bool> QuitEvent;
 
         public void Run(IInputService inputService, IOutputService outputService)
@@ -50,7 +52,7 @@ namespace Zork.Common
         }
         private void Input_InputReceived(object sender, string inputString)
         {
-            string[] commandInputs = inputString.Split(" ");
+            string[] commandInputs = inputString.Split(' ');
             Commands command = ToCommand(commandInputs[(int)CommandArguments.Verb]);
 
             string outputString;

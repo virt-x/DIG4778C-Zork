@@ -1,15 +1,19 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Zork.Common
 {
-    public class Room : IEquatable<Room>
+    public class Room : IEquatable<Room>, INotifyPropertyChanged
     {
         private List<Item> _inventory;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         [JsonProperty(Order = 1)]
-        public string Name { get; }
+        public string Name { get; private set; }
         [JsonProperty(Order = 2)]
         public string Description { get; set; }
         [JsonProperty(PropertyName = "Neighbors", Order = 3)]
@@ -63,7 +67,7 @@ namespace Zork.Common
         public void UpdateNeighbors(World world)
         {
             Neighbors = (from entry in NeighborNames
-                         let room = world.RoomsByName.GetValueOrDefault(entry.Value)
+                         let room = world.RoomsByName.TryGetValue(entry.Value, out Room room) ? room : default
                          where room != null
                          select (Direction: entry.Key, Room: room))
                          .ToDictionary(pair => pair.Direction, pair => pair.Room);
@@ -74,7 +78,7 @@ namespace Zork.Common
         public void UpdateInventory(World world)
         {
             _inventory = (from entry in InventoryNames
-                          let item = world.ItemsByName.GetValueOrDefault(entry.ToUpper())
+                          let item = world.ItemsByName.TryGetValue(entry.ToUpper(), out Item item) ? item : default
                           where item != null
                           select item).ToList();
 
@@ -96,6 +100,11 @@ namespace Zork.Common
             {
                 throw new Exception($"Item {item.Name} does not exist in this room.");
             }
+        }
+
+        public void RenameRoom(string name)
+        {
+            Name = name;
         }
 
         public override string ToString()
